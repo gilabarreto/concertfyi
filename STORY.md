@@ -1,5 +1,3 @@
-test
-
 ### Description
 
 A web app that allows users to keep track of their favourite music artists, 
