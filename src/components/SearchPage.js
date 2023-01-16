@@ -15,7 +15,7 @@ export default function SearchPage(props) {
             keyword: artist,
             segmentId: "KZFzniwnSyZfZ7v7nJ",
             sort: "name,asc",
-            apikey: "kMv2pjo5bzSz5iyaz0h5aLqGnQcWyOSL",
+            apikey: process.env.REACT_APP_TICKETMASTER_KEY,
           },
         })
         .then((res) => {

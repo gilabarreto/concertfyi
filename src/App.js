@@ -38,7 +38,7 @@ function App() {
         },
         headers: {
           Accept: "application/json",
-          "x-api-key": "eY_2IYBgy3ovn4sRZSqa9cTZy1nldhaUCvif",
+          "x-api-key": process.env.REACT_APP_SETLIST_KEY,
         },
       });
 
@@ -49,7 +49,7 @@ function App() {
           keyword: `"${favourite.artistname}"`,
           segmentId: "KZFzniwnSyZfZ7v7nJ",
           sort: "name,asc",
-          apikey: "kMv2pjo5bzSz5iyaz0h5aLqGnQcWyOSL",
+          apikey: process.env.REACT_APP_TICKETMASTER_KEY,
         },
       }
     );

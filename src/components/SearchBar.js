@@ -34,7 +34,7 @@ export default function SearchBar(props) {
         },
         headers: {
           Accept: "application/json",
-          "x-api-key": "eY_2IYBgy3ovn4sRZSqa9cTZy1nldhaUCvif",
+          "x-api-key": process.env.REACT_APP_SETLIST_KEY,
         },
       });
 
@@ -45,7 +45,7 @@ export default function SearchBar(props) {
           keyword: `"${value}"`,
           segmentId: "KZFzniwnSyZfZ7v7nJ",
           sort: "name,asc",
-          apikey: "kMv2pjo5bzSz5iyaz0h5aLqGnQcWyOSL",
+          apikey: process.env.REACT_APP_TICKETMASTER_KEY,
         },
       }
     );
