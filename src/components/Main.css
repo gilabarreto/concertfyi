@@ -1,13 +1,10 @@
 .main-top-container {
 
-  /* border-color: blue; */
-  /* border-style: solid; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 0.5em;
   margin: 1em;
   min-height: 17vh;
   display: flex;
-  /* background-image: url(../imgs/main-img.jpeg); */
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: inset 0 0 0 2000px rgba(117, 171, 188, 0.7);
@@ -47,20 +44,3 @@
   flex-direction: column;
   overflow: hidden;
 }
-
-/* .main-page-card {
-  padding-top: 3em;
-  height: 100vh;
-  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.5em;
-  font-weight: 600;
-  text-shadow: 2px 2px 4px #000;
-  transition: all 300ms;
-  color: #fff;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: row;
-  overflow: hidden;
-} */
