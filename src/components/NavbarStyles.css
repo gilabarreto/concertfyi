@@ -12,10 +12,6 @@ nav {
   padding: 17px;
 }
 
-/* .annoucement{
-  height: 44px;
-  margin-bottom: 12px;
-} */
 .logo {
   display: flex;
   align-items: flex-end;
@@ -65,7 +61,6 @@ nav {
   border-width: 0;
 }
 
-
 .toggle-register-login {
   text-decoration: underline;
   cursor: pointer;
@@ -77,7 +72,6 @@ nav {
   display: flex;
   right: 10px;
   gap: 5px;
-  /* justify-items: center; */
 }
 
 .nav-icons {
