@@ -33,14 +33,11 @@
   outline: none;
   color: white;
   height: 100%;
-
 }
 
 .input-text-search::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: white;
   opacity: 0.5;
-  /* Firefox */
 }
 
 .input-text-search::-webkit-search-cancel-button {
