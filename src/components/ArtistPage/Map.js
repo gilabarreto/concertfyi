@@ -7,7 +7,7 @@ export default function Map(props) {
   const coordinates = props.concert.venue.city.coords;
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyD8AVh8DuRPrQrNM1Dp0TCX0SA02dI9ADU'
+    googleMapsApiKey: process.env.REACT_APP_GOOGGLE_MAPS_KEY
   })
 
   if (!isLoaded) return <div>Loading...</div>

@@ -2,16 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .prevConc {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
   color: #FAF9F6;
   cursor: pointer;
-  font-weight: bold;
-  font-family: 'Roboto', sans-serif;
 }
 
 .prevConc-title {
+  font-family: 'Road Rage', cursive;
   font-size: 3em;
   color: #FAF9F6;
-  font-family: 'Road Rage', cursive;
+}
+
+.prevConc:hover {
+  color: red;
 }
 
 .prevConc-list {
@@ -19,10 +23,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-.prevConc:hover {
-  color: red;
 }
 
 .map-container {
@@ -35,15 +35,15 @@
 }
 
 .next-concerts {
-  font-size: 3em;
   font-family: 'Road Rage', cursive;
+  font-size: 3em;
   color: #FAF9F6;
 }
 
 .setlist-title {
+  font-family: 'Road Rage', cursive;
   font-size: 3em;
   color: #FAF9F6;
-  font-family: 'Road Rage', cursive;
 }
 
 .setlist-songs-ul {
@@ -67,18 +67,19 @@
 }
 
 .artist-page-upcoming-concerts {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border-radius: 0.5em;
-  padding: 2em;
-  margin-right: 1em;
-  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  color: #FAF9F6;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #FAF9F6;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  border-radius: 0.5em;
+  padding: 2em;
+  margin-right: 1em;
+  background: none;
 }
 
 .artist-page-upcoming-concerts li {
@@ -88,8 +89,6 @@
 }
 
 .artist-page-top-container {
-  /* border-color: blue; */
-  /* border-style: solid; */
   display: flex;
   justify-content: space-around;
   flex-direction: row;
@@ -97,37 +96,32 @@
 }
 
 .artist-page-bottom-container {
-  /* border-color: blue; */
-  /* border-style: solid; */
   display: flex;
   flex-direction: row;
 }
 
 .artist-page-concert-info {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
   border-radius: 0.5em;
   padding-right: 2em;
   margin: 1em;
   min-height: 100%;
   word-break: break-word;
   background: none;
-  /* transition: all 300ms; */
   color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  overflow: hidden;
   font-family: 'Roboto', sans-serif;
 }
 
 .artist-page-map {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 0.5em;
   margin: 1em;
   min-width: 50%;
   min-height: 100%;
-  background: #fff;
-  /* transition: all 300ms; */
+  background-color: #fff;
   color: #555;
   display: flex;
   align-items: center;
@@ -137,12 +131,9 @@
 }
 
 .artist-page-bottom-left-container {
-  /* border-color: red; */
-  /* border-style: solid; */
   padding: 1em;
   display: flex;
   width: 60%;
-  align-content: center;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
@@ -150,14 +141,13 @@
 }
 
 .artist-page-setlist {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 0.5em;
   padding-right: 2em;
   margin-left: 1em;
   min-height: 100%;
   width: 50%;
-  background: none;
-  color: white;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -166,13 +156,12 @@
 }
 
 .artist-page-spotify {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 0.5em;
   margin-left: 1em;
   min-height: 100%;
   width: 50%;
-  background: #000;
-  /* transition: all 300ms; */
+  background-color: #000;
   color: #fff;
   display: flex;
   align-content: flex-start;
@@ -182,10 +171,7 @@
 }
 
 .artist-page-bottom-right-container {
-  /* border-color: red; */
-  /* border-style: solid; */
   padding: 1em;
-  /* display: flex; */
   width: 40%;
   align-content: center;
   justify-content: space-between;
@@ -194,14 +180,12 @@
 }
 
 .artist-page-previous-concerts {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 0.5em;
   margin-top: 1em;
   margin-right: 1em;
   padding: 2em;
-  background: none;
-  /* transition: all 300ms; */
-  color: white;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,34 +199,23 @@
 .socials-icons {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   justify-content: center;
 }
 
 .artist-page-increase-decrease {
   align-items: center;
-  /* background-color: #75ABBC; */
-  /* border: 1px solid rgba(0, 0, 0, 0.1); */
-  /* border-radius: .25rem; */
-  height: 2em;
-  width: 2em;
   color: rgba(230, 230, 230, 0.5);
   cursor: pointer;
   display: inline-flex;
-  /* font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif; */
-  /* font-weight: 600; */
   justify-content: center;
   margin: 0;
-  /* min-height: 2rem; */
-  padding: calc(.675rem - 1px) calc(1rem - 1px);
+  padding: calc(0.675rem - 1px) calc(1rem - 1px);
   position: relative;
-  /* text-decoration: none; */
   transition: all 250ms;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: baseline;
-  width: auto;
 }
 
 .artist-page-increase-decrease:hover,
@@ -272,44 +245,11 @@
   font-size: 2em;
 }
 
-
-/* SEARCH PAGE */
-
 .spotify-true:hover {
   color: rgb(153, 255, 1);
 }
 
-.next-concert {
-  font-family: 'Rock Salt';
-  align-items: center;
-  display: inline-flex;
-  font-size: 1em;
-  font-weight: 600;
-  justify-content: center;
-  margin: 0;
-  min-height: 2rem;
-  padding: calc(.675rem - 1px) calc(1rem - 1px);
-  text-decoration: none;
-  vertical-align: baseline;
-  width: auto;
-  color: #fff;
-  /* -webkit-animation: glow-next 1s ease-in-out infinite alternate;
-  -moz-animation: glow-next 1s ease-in-out infinite alternate;
-  animation: glow-next 1s ease-in-out infinite alternate; */
-}
-
-/* @keyframes glow-next {
-  from {
-    text-shadow: 0 0 7px, 0 0 10px, 0 0 21px;
-    ;
-  }
-
-  to {
-    text-shadow: 0 0 7px, 0 0 10px, 0 0 21px;
-    ;
-  }
-} */
-
+.next-concert,
 .last-concert {
   font-family: 'Rock Salt';
   align-items: center;
@@ -319,27 +259,11 @@
   justify-content: center;
   margin: 0;
   min-height: 2rem;
-  padding: calc(.675rem - 1px) calc(1rem - 1px);
-  /* text-decoration: none; */
+  padding: calc(0.675rem - 1px) calc(1rem - 1px);
   vertical-align: baseline;
   width: auto;
   color: #fff;
-  /* -webkit-animation: glow 1s ease-in-out infinite alternate;
-  -moz-animation: glow 1s ease-in-out infinite alternate;
-  animation: glow 1s ease-in-out infinite alternate; */
 }
-
-/* @keyframes glow {
-  from {
-    text-shadow: 0 0 7px, 0 0 10px, 0 0 21px;
-    ;
-  }
-
-  to {
-    text-shadow: 0 0 7px, 0 0 10px, 0 0 21px;
-    ;
-  }
-} */
 
 .spotify-play-now {
   font-family: 'Rock Salt', cursive;
@@ -347,8 +271,6 @@
   padding-bottom: 15px;
   font-weight: 600;
   color: #fff;
-  -webkit-animation: play 1s ease-in-out infinite alternate;
-  -moz-animation: play 1s ease-in-out infinite alternate;
   animation: play 1s ease-in-out infinite alternate;
 }
 
@@ -374,43 +296,12 @@
   text-decoration: none;
   vertical-align: baseline;
   width: auto;
-
 }
-
-/* .search-page-button:hover,
-.search-page-button:focus {
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-  color: rgba(0, 0, 0, 0.65);
-}
-
-.search-page-button:hover {
-  transform: translateY(-1px);
-}
-
-.search-page-button:active {
-  background-color: #F0F0F1;
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
-  color: rgba(0, 0, 0, 0.65);
-  transform: translateY(0);
-} */
-
-
 
 .search-page-card {
   background: rgba(5, 5, 5, 0.3);
-  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   border-radius: 0.5em;
-  /* margin: 1em; */
-  /* min-height: 17vh; */
-  background-color: none;
-  /*   transition: 0.25s;
-  transition-timing-function: ease-out;
-  transform: scale(1,1);
-  transform-origin:  top; */
   font-family: "Roboto Condensed", sans-serif;
-  /* color: #555; */
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -422,9 +313,6 @@
 }
 
 .search-page-image {
-  /* max-height: 9em; */
-  background: #fff;
-  /* transition: all 2000ms; */
   width: 215px;
   height: 142px;
   display: flex;
@@ -434,11 +322,11 @@
   cursor: pointer;
 }
 
+
 .search-page-image-box {
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 4px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px 0 inset;
   border-radius: 0.5em;
   margin-left: 60px;
-  /* background: #fff; */
   color: #555;
   display: flex;
   align-items: center;
@@ -448,30 +336,22 @@
 }
 
 .search-artist {
-  /* display: block; */
   font-size: 2em;
   cursor: pointer;
   width: 400px;
 }
 
 .search-tour {
-  /* display: block; */
   font-size: 1.17em;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin: 1em 0;
   font-weight: bold;
-  /* text-align: left; */
-  margin: unset
 }
 
 .search-page-info-box {
-  /* margin: 1em; */
   background: none;
   color: white;
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: center;
   flex-direction: row;
   margin: auto;
@@ -489,51 +369,31 @@
   min-width: 12em;
   min-height: 7em;
   transition: all 600ms;
-  color: rgb(255, 250, 250);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   overflow: hidden;
   text-transform: uppercase;
-
 }
 
-.favourite-icon {
-  color: white;
+.favourite-icon,
+.delete-icon {
+  color: #fff;
   cursor: pointer;
 }
 
-.favourite-icon:hover {
-  color: red
+.favourite-icon:hover,
+.delete-icon:hover {
+  color: red;
 }
 
 .favourite-icon.active {
-  color: red
+  color: red;
 }
 
-.favourite-text {
-  color: white;
-}
-
+.favourite-text,
 .delete-icon {
-  color: white;
-  cursor: pointer;
-}
-
-.delete-icon:hover {
-  color: red
-}
-
-.favourite-text {
-  color: white;
-}
-
-.delete-icon {
-  color: white;
-  cursor: pointer;
-}
-
-.delete-icon:hover {
-  color: red
+  color: #fff;
 }
