@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Navbar(props) {
+  // State hooks
   const [dropdownLogin, setDropdownLogin] = useState(false);
   const toggleLogin = useCallback(() => {
     setDropdownLogin((opened) => !opened);
@@ -25,8 +26,10 @@ function Navbar(props) {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
+  // Navigate hook
   const navigate = useNavigate();
 
+  // Clear input fields function
   const clear = () => {
     setName("");
     setPassword("");
@@ -34,10 +37,12 @@ function Navbar(props) {
     setErrorMsg("");
   };
 
+  // Click event function
   const handleClick = () => {
     props.setValue("");
   };
 
+  // Registration function
   const register = (e) => {
     e.preventDefault();
     axios
@@ -65,6 +70,7 @@ function Navbar(props) {
     setErrorMsg("");
   };
 
+  // Login function
   const login = (e) => {
     e.preventDefault();
     axios
@@ -95,6 +101,7 @@ function Navbar(props) {
     setErrorMsg("");
   };
 
+  // Logout function
   const logout = useCallback(() => {
     setisUserLogged(false);
     setDropdownLogin(false);
