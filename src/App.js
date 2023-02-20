@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -16,8 +16,8 @@ function App() {
   // Declare state variables and their initial values using the useState hook
   const [setlist, setSetlist] = useState([]); // Array of setlists
   const [ticketmaster, setTicketmaster] = useState([]); // Array of Ticketmaster data
-  const [lat, setLat] = useState([]); // Latitude
-  const [long, setLong] = useState([]); // Longitude
+  const [lat, setLat] = useState([null]); // Latitude
+  const [long, setLong] = useState([null]); // Longitude
   const [token, setToken] = useState(""); // Token for authentication
   const [value, setValue] = useState(""); // Value of the search input
   const [favourites, setFavourites] = useState([]); // Array of favourite artists
@@ -26,7 +26,7 @@ function App() {
   const [favouritesTickets, setFavouritesTickets] = useState([]); // Array of ticket information for each favourite artist
 
   // Function to fetch data for a favourite artist
-  const fetchDataByFavourite = (favourite) => {
+  const fetchDataByFavourite = useCallback((favourite) => {
     // Make a GET request to Setlist.fm API to get setlists for the artist
     const setlistPromise = axios.get("/rest/1.0/search/setlists", {
       params: {
@@ -83,20 +83,13 @@ function App() {
           },
         ]);
 
-        // Finds the Spotify link and image for the favourite artist
-        const ticketmasterMap =
-          ticketmasterResponse.data._embedded.attractions.find(
-            (item) => item.name === favourite.artistname
-          );
+        // // Finds the Spotify link and image for the favourite artist
+        // const ticketmasterMap =
+        //   ticketmasterResponse.data._embedded.attractions.find(
+        //     (item) => item.name === favourite.artistname
+        //   );
 
-        let spotify = null;
-        if (
-          ticketmasterMap &&
-          ticketmasterMap.externalLinks &&
-          ticketmasterMap.externalLinks.spotify
-        ) {
-          spotify = ticketmasterMap.externalLinks.spotify[0].url;
-        }
+        // const spotify = ticketmasterMap?.externalLinks?.spotify?.[0]?.url ?? null;
 
         // Filters for only attractions from events and sorts by concert date
         const ticketmasterEvents = ticketmasterResponse.data._embedded.events
@@ -104,10 +97,7 @@ function App() {
           .filter(attraction => attraction.name === favourite.artistname)
           .sort((a, b) => a.dates.start.localDate.localeCompare(b.dates.start.localDate));
 
-        let upcomingConcert = null;
-        if (ticketmasterEvents[0] && ticketmasterEvents[0].dates) {
-          upcomingConcert = ticketmasterEvents[0].dates.start.localDate;
-        }
+        const upcomingConcert = ticketmasterEvents?.[0]?.dates?.start?.localDate ?? null;
 
         // Updates state with the favourite artist's name and upcoming concert date
         setFavouritesTickets((prev) => [
@@ -121,7 +111,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -143,7 +133,7 @@ function App() {
 
   useEffect(() => {
     favourites.map((item) => fetchDataByFavourite(item));
-  }, [favourites])
+  }, [fetchDataByFavourite, favourites])
 
   library.add(fab, faHeart, faMusic, faTrash);
 
