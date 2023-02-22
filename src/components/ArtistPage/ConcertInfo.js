@@ -1,48 +1,41 @@
-import { FaYoutube, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaYoutube, FaInstagram, FaTwitter } from "react-icons/fa"; // Importing icons from react-icons library
 
-import ConcertDate from "./ConcertDate";
+import ConcertDate from "./ConcertDate"; // Importing ConcertDate component
 
 export default function ConcertInfo(props) {
   
-  // const { previousConcertId, nextConcertId } = props; // Victor
-  
-  const artistInfo = props.setlist;
-
+  // Extracting required data from props
+  const artistInfo = props.setlist; 
   const concert = props.concert;
-
+  
+  // Extracting required data from concert object
   const artist = concert.artist.name;
-
-  const tour = concert.tour?.name || "No tour name";
-
+  const tour = concert.tour?.name || "No tour name"; // If tour name is not present, "No tour name" will be used instead
   const venue = concert.venue?.name;
-
   const city = concert.venue.city?.name;
-
   const state = concert.venue.city?.state;
-
   const country = concert.venue.city?.country.code;
 
   return (
     <>
       <ol>
-        <ConcertDate 
+        <ConcertDate
         concert={concert}
         setlist={props.setlist} 
         artistInfo={artistInfo} />
         <h2>
           Artist:&ensp;{artist}
         </h2>
-          <h2 className="tour">Tour:&ensp;{tour}</h2>
-          <h2>Venue:&ensp;{venue}</h2>
-          <h2>
+        <h2 className="tour">Tour:&ensp;{tour}</h2>
+        <h2>Venue:&ensp;{venue}</h2>
+        <h2>
           Location:&ensp;{city}, {state}, {country}
         </h2>
         <div className="socials-icons">
-        {props.ticketmaster.attractions ? (
+          {/* Checking if ticketmaster.attractions object exists before accessing youtube, instagram, and twitter links */}
+          {props.ticketmaster.attractions ? (
             <a
-              href={
-                props.ticketmaster.attractions[0].externalLinks.youtube[0].url
-              }
+              href={props.ticketmaster.attractions[0].externalLinks.youtube[0].url}
               target="_blank"
             >
               <FaYoutube
@@ -52,9 +45,7 @@ export default function ConcertInfo(props) {
           ) : null}
           {props.ticketmaster.attractions ? (
             <a
-              href={
-                props.ticketmaster.attractions[0].externalLinks.instagram[0].url
-              }
+              href={props.ticketmaster.attractions[0].externalLinks.instagram[0].url}
               target="_blank"
             >
               <FaInstagram style={{ color: "hotpink", paddingRight: "2em", height: "2em", width: "2em"}} />
@@ -62,9 +53,7 @@ export default function ConcertInfo(props) {
           ) : null}
           {props.ticketmaster.attractions ? (
             <a
-              href={
-                props.ticketmaster.attractions[0].externalLinks.twitter[0].url
-              }
+              href={props.ticketmaster.attractions[0].externalLinks.twitter[0].url}
               target="_blank"
             >
               <FaTwitter style={{ color: "#1DA1F2", height: "2em", width: "2em", paddingRight: "2em"}} />
