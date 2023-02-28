@@ -1,13 +1,11 @@
 import { ticketFinder } from "../../helpers/selectors";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function UpcomingConcertList(props) {
+  // Extracts the relevant events from the Ticketmaster API data based on the artist's name
   const ticketmasterEvents = props.ticketmaster.events
     ? props.ticketmaster.events
-        .map((item) => {
-          return item;
-        })
         .filter((item) => {
+          // Filters out events that do not have any attractions or the artist's name does not match
           if (item._embedded.attractions !== undefined) {
             for (const attraction of item._embedded.attractions) {
               if (attraction.name === props.concert.artist.name) {
@@ -15,10 +13,13 @@ export default function UpcomingConcertList(props) {
               }
             }
           }
+          return item;
         })
+        // Sorts the events by start date
         .sort((a, b) => a.dates.start.localDate - b.dates.start.localDate)
     : [];
 
+  // Converts the dates of the upcoming concerts to a readable format
   const upcomingConcerts = ticketmasterEvents.map((upcomingConcert) => {
     const str = upcomingConcert.dates.start.localDate;
     const [year, month, day] = str.split("-");
@@ -31,9 +32,11 @@ export default function UpcomingConcertList(props) {
     return date.toLocaleDateString("en-US", options);
   });
 
+  // Creates an array of upcoming concert items to render
   const mapConcerts =
     upcomingConcerts.length > 0
       ? upcomingConcerts
+          .slice(0, 10) // Limits the number of items to 10
           .map((upcomingConcert, upcomingConcertIndex) => {
             const ticketArr = ticketFinder(props.ticketmaster);
             const ticketsUrl = ticketArr[upcomingConcertIndex];
@@ -46,23 +49,31 @@ export default function UpcomingConcertList(props) {
               />
             );
           })
-          .slice(0, 10)
       : [];
 
   return (
     <>
-      {upcomingConcerts.length === 0
-        ? "There are no upcoming concerts.\n Please come back later"
-        : mapConcerts}
+      {upcomingConcerts.length === 0 ? (
+        "There are no upcoming concerts.\n Please come back later"
+      ) : (
+        // Renders the upcoming concert items
+        mapConcerts
+      )}
     </>
   );
 }
 
 function UpcomingConcertListItem(props) {
+  // Renders an upcoming concert item with a clickable link to buy tickets
   return (
     <div className="upcoming-concerts-container">
-    {props.upcomingConcert.split("-").reverse().join("-")}&ensp;{" "}
-    <span className="get-tickets" onClick={()=>window.open(props.ticketsUrl,'_blank')}>Get Tickets!</span>
+      {props.upcomingConcert.split("-").reverse().join("-")}&ensp;
+      <span
+        className="get-tickets"
+        onClick={() => window.open(props.ticketsUrl, "_blank")}
+      >
+        Get Tickets!
+      </span>
     </div>
   );
 }
