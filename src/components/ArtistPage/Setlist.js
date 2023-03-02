@@ -16,7 +16,6 @@ export default function Setlist(props) {
       <span className="setlist-title">Setlist</span>
       {/* A unordered list to display the songs */}
       <ul className="setlist-songs-ul">
-        <p>
           {/* Displaying a message if there are no songs in the setlist, otherwise displaying the list of songs */}
           {songsList.length === 0
             ? "There are no songs in this setlist.\n Please come back later"
@@ -28,7 +27,6 @@ export default function Setlist(props) {
                   &ensp;{song}
                 </div>
               ))}
-        </p>
       </ul>
     </>
   );

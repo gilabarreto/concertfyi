@@ -65,18 +65,15 @@ export default function ArtistPage(props) {
           {/* Upcoming concerts section */}
           <div className="artist-page-upcoming-concerts">
             <span className="next-concerts">Upcoming Concerts</span>
-            <p>
               <UpcomingConcertList
                 ticketmaster={props.ticketmaster}
                 setlist={props.setlist}
                 concert={concert}
               />
-            </p>
           </div>
           {/* Previous concerts section */}
           <div className="artist-page-previous-concerts">
             <span className="prevConc-title">Previous Concerts</span>
-            <p>
               <div>
                 <PreviousConcerts
                   concert={concert}
@@ -84,7 +81,6 @@ export default function ArtistPage(props) {
                   artistId={artistId}
                 />
               </div>
-            </p>
           </div>
         </div>
       </div>
