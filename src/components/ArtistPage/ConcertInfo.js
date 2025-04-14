@@ -35,9 +35,10 @@ export default function ConcertInfo(props) {
           {/* Checking if ticketmaster.attractions object exists before accessing youtube, instagram, and twitter links */}
           {props.ticketmaster.attractions ? (
             <a
-              href={props.ticketmaster.attractions[0].externalLinks.youtube[0].url}
-              target="_blank"
-            >
+            href={props.ticketmaster.attractions[0].externalLinks.youtube[0].url}
+            target="_blank"
+            rel="noreferrer"
+          >
               <FaYoutube
                 style={{ color: "red", paddingLeft: 5, paddingRight: "2em", height: "2em", width: "2em"}}
               />
@@ -46,7 +47,7 @@ export default function ConcertInfo(props) {
           {props.ticketmaster.attractions ? (
             <a
               href={props.ticketmaster.attractions[0].externalLinks.instagram[0].url}
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
               <FaInstagram style={{ color: "hotpink", paddingRight: "2em", height: "2em", width: "2em"}} />
             </a>
@@ -54,7 +55,7 @@ export default function ConcertInfo(props) {
           {props.ticketmaster.attractions ? (
             <a
               href={props.ticketmaster.attractions[0].externalLinks.twitter[0].url}
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
               <FaTwitter style={{ color: "#1DA1F2", height: "2em", width: "2em", paddingRight: "2em"}} />
             </a>

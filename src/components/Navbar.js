@@ -12,7 +12,7 @@ function Navbar(props) {
   const [dropdownLogin, setDropdownLogin] = useState(false);
   const toggleLogin = useCallback(() => {
     setDropdownLogin((opened) => !opened);
-  }, [dropdownLogin]);
+  }, []);
 
   const [isUserLogged, setisUserLogged] = useState(
     JSON.parse(localStorage.getItem("user")) || false
@@ -108,14 +108,14 @@ function Navbar(props) {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     navigate("/");
-  });
+  }, [navigate]);
 
   return (
     <div>
       <nav>
         <div>
           <Link to="/">
-            <img src={logo} className="logo" onClick={handleClick} />
+            <img src={logo} className="logo" onClick={handleClick} alt="Logo"/>
           </Link>
         </div>
         <div>Home · About · Contact</div>
@@ -126,7 +126,7 @@ function Navbar(props) {
             <SocialIcon network="twitter" style={{ height: 35, width: 35 }} />
             <SocialIcon network="facebook" style={{ height: 35, width: 35 }} />
           </div>
-          <img src={loginIcon} className="loginIcon" onClick={toggleLogin} />
+          <img src={loginIcon} className="loginIcon" onClick={toggleLogin} alt="Login Icon"/>
           {dropdownLogin && (
             <div className="dropdown">
               {isUserLogged ? (

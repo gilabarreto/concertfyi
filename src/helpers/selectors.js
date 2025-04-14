@@ -37,7 +37,7 @@ export function latitudeFinder(ticketmasterData) {
 
   const result = latitude?._embedded?.venues[0].location.latitude
 
-  return "latitude", result // Return the latitude
+  return result; // Return the latitude
 }
 
 // This function takes in a Ticketmaster data object and returns the longitude of the venue for the first upcoming concert
@@ -58,5 +58,5 @@ export function longitudeFinder(ticketmasterData) {
 
   const result = longitude?._embedded?.venues[0].location.longitude
 
-  return "longitude", result // Return the longitude
+  return result; // Return the longitude
 }

@@ -1,25 +1,25 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
+const path = require("path");
 
-//middleware
-app.use(express.json()); //req.body
+const app = express();
+const PORT = 4000;
+
+// Middleware
+app.use(express.json());
 app.use(cors());
 
-//ROUTES//
-
-//Register and Login routes
-
+// API routes
 app.use("/auth", require("./routes/jwtAuth"));
-
-//Favourite route
-
-app.use("/favourite", require("./routes/favourite"))
-
-//Dashbaord route
-
+app.use("/favourite", require("./routes/favourite"));
 app.use("/dashboard", require("./routes/dashboard"));
 
-app.listen(4000, () => {
-  console.log("Server listening on port 4000");
+// Serve React app (assuming React is in client/build)
+app.use(express.static(path.join(__dirname, "../client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });

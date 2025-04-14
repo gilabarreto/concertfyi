@@ -94,7 +94,7 @@ export default function Favourites(props) {
           <div key={artistId} className="search-page-card">
             {/* Display artist image */}
             <div className="search-page-image-box">
-              <img src={artistImage} className="search-page-image" />
+              <img src={artistImage} className="search-page-image" alt={`${artist}`}/>
             </div>
 
             {/* Display artist name */}

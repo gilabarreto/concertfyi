@@ -13,127 +13,96 @@ import { faHeart, faMusic, faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 function App() {
-  // Declare state variables and their initial values using the useState hook
-  const [setlist, setSetlist] = useState([]); // Array of setlists
-  const [ticketmaster, setTicketmaster] = useState([]); // Array of Ticketmaster data
-  const [lat, setLat] = useState([null]); // Latitude
-  const [long, setLong] = useState([null]); // Longitude
-  const [token, setToken] = useState(""); // Token for authentication
-  const [value, setValue] = useState(""); // Value of the search input
-  const [favourites, setFavourites] = useState([]); // Array of favourite artists
-  const [loadingfavourites, setLoadingfavourites] = useState(false); // Flag to indicate whether favourites are loading
-  const [favouritesConcerts, setFavouritesConcerts] = useState([]); // Array of concerts for each favourite artist
-  const [favouritesTickets, setFavouritesTickets] = useState([]); // Array of ticket information for each favourite artist
+  const [setlist, setSetlist] = useState([]);
+  const [ticketmaster, setTicketmaster] = useState([]);
+  const [lat, setLat] = useState(null);
+  const [long, setLong] = useState(null);
+  const [token, setToken] = useState("");
+  const [value, setValue] = useState("");
+  const [favourites, setFavourites] = useState([]);
+  const [loadingfavourites, setLoadingfavourites] = useState(false);
+  const [favouritesConcerts, setFavouritesConcerts] = useState([]);
+  const [favouritesTickets, setFavouritesTickets] = useState([]);
 
-  // Function to fetch data for a favourite artist
   const fetchDataByFavourite = useCallback((favourite) => {
-    // Make a GET request to Setlist.fm API to get setlists for the artist
-    const setlistPromise = axios.get("/rest/1.0/search/setlists", {
+    const setlistPromise = axios.get("/setlist/rest/1.0/search/setlists", {
       params: {
-        artistName: `"${favourite.artistname}"`, // Use the artist name to search for setlists
-        p: "1", // Only get the first page of results
+        artistName: favourite.artistname,
+        p: "1",
       },
       headers: {
         Accept: "application/json",
-        "x-api-key": process.env.REACT_APP_SETLIST_KEY, // Use the API key for Setlist.fm
+        "x-api-key": process.env.REACT_APP_SETLIST_KEY,
       },
     });
 
-    // Make a GET request to Ticketmaster API to get data for the artist
-    const ticketmasterPromise = axios.get(
-      "https://app.ticketmaster.com/discovery/v2/suggest",
-      {
-        params: {
-          keyword: `"${favourite.artistname}"`, // Use the artist name to search for events
-          segmentId: "KZFzniwnSyZfZ7v7nJ", // Use the music segment ID
-          sort: "name,asc", // Sort the results by name in ascending order
-          apikey: process.env.REACT_APP_TICKETMASTER_KEY, // Use the API key for Ticketmaster
-        },
-      }
-    );
+    const ticketmasterPromise = axios.get("/ticketmaster/discovery/v2/suggest", {
+      params: {
+        keyword: favourite.artistname,
+        segmentId: "KZFzniwnSyZfZ7v7nJ",
+        sort: "name,asc",
+        apikey: process.env.REACT_APP_TICKETMASTER_KEY,
+      },
+    });
 
     Promise.all([setlistPromise, ticketmasterPromise])
       .then(([setlistResponse, ticketmasterResponse]) => {
-        // Filters setlist data by concert date, only show concerts that already happened
-        const noUpcomingConcert = setlistResponse.data.setlist.filter(item => {
-          const [year, month, day] = item.eventDate.split("-");
-          return Number(new Date(year, month - 1, day)) < Date.now();
-        });
+        const filteredSetlist = setlistResponse.data.setlist?.filter(item => {
+          const [day, month, year] = item.eventDate.split("-");
+          return new Date(`${year}-${month}-${day}`) < new Date();
+        }) || [];
 
-        const uniqueIds = [];
-
-        // Filters the data for unique artists
-        const uniqueSetlist = noUpcomingConcert.filter((item) => {
-          const isDuplicate = uniqueIds.includes(item.artist.mbid);
-
-          if (!isDuplicate) {
-            uniqueIds.push(item.artist.mbid);
+        const uniqueArtists = [];
+        const uniqueSetlist = filteredSetlist.filter(item => {
+          if (!uniqueArtists.includes(item.artist.mbid)) {
+            uniqueArtists.push(item.artist.mbid);
             return true;
           }
-
           return false;
         });
 
-        // Updates state with the favourite artist's name and last concert date
-        setFavouritesConcerts((prev) => [
+        setFavouritesConcerts(prev => ([
           ...prev,
           {
             artistname: favourite.artistname,
-            lastConcert: uniqueSetlist[0].eventDate,
-          },
-        ]);
+            lastConcert: uniqueSetlist[0]?.eventDate || null,
+          }
+        ]));
 
-        // // Finds the Spotify link and image for the favourite artist
-        // const ticketmasterMap =
-        //   ticketmasterResponse.data._embedded.attractions.find(
-        //     (item) => item.name === favourite.artistname
-        //   );
+        const events = ticketmasterResponse.data._embedded?.events || [];
+        const nextEvent = events.find(event =>
+          event._embedded?.attractions?.some(a => a.name === favourite.artistname)
+        );
 
-        // const spotify = ticketmasterMap?.externalLinks?.spotify?.[0]?.url ?? null;
-
-        // Filters for only attractions from events and sorts by concert date
-        const ticketmasterEvents = ticketmasterResponse.data._embedded.events
-          .flatMap(event => event._embedded.attractions || [])
-          .filter(attraction => attraction.name === favourite.artistname)
-          .sort((a, b) => a.dates.start.localDate.localeCompare(b.dates.start.localDate));
-
-        const upcomingConcert = ticketmasterEvents?.[0]?.dates?.start?.localDate ?? null;
-
-        // Updates state with the favourite artist's name and upcoming concert date
-        setFavouritesTickets((prev) => [
+        setFavouritesTickets(prev => ([
           ...prev,
           {
             artistname: favourite.artistname,
-            upcomingConcert,
-          },
-        ]);
+            upcomingConcert: nextEvent?.dates?.start?.localDate || null,
+          }
+        ]));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(err => console.error("Erro ao buscar dados por favorito:", err));
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const localToken = localStorage.getItem("token");
     setLoadingfavourites(true);
-    axios
-      .get("http://localhost:4000/favourite", {
-        headers: {
-          token: token,
-        },
-      })
-      .then((res) => {
-        setLoadingfavourites(false);
+    axios.get("http://localhost:4000/favourite", {
+      headers: { token: localToken },
+    })
+      .then(res => {
         setFavourites(res.data);
-      })
-      .catch(() => {
         setLoadingfavourites(false);
-      });
+      })
+      .catch(() => setLoadingfavourites(false));
   }, []);
 
   useEffect(() => {
-    favourites.map((item) => fetchDataByFavourite(item));
-  }, [fetchDataByFavourite, favourites])
+    if (favourites.length) {
+      favourites.forEach(fetchDataByFavourite);
+    }
+  }, [fetchDataByFavourite, favourites]);
 
   library.add(fab, faHeart, faMusic, faTrash);
 
@@ -165,7 +134,7 @@ function App() {
                 favouritesTickets={favouritesTickets}
               />
             }
-          ></Route>
+          />
 
           <Route
             path="/"
@@ -177,7 +146,7 @@ function App() {
                 ticketmaster={[]}
               />
             }
-          ></Route>
+          />
 
           <Route
             path="/search"
@@ -189,7 +158,7 @@ function App() {
                 ticketmaster={ticketmaster}
               />
             }
-          ></Route>
+          />
 
           <Route
             path="artists/:artistId/concerts/:concertId"
@@ -202,7 +171,7 @@ function App() {
                 token={token}
               />
             }
-          ></Route>
+          />
         </Routes>
       </div>
     </Router>

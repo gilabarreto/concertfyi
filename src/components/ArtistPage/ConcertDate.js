@@ -29,6 +29,7 @@ export default function ConcertDate(props) {
       }
       return true;
     }
+    return false;
   });
 
   const navigate = useNavigate();
